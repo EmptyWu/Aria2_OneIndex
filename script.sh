@@ -40,7 +40,7 @@ function OneIndex_install(){
     yum install git -y
 	yum update nss curl iptables -y
     mkdir -p /home/wwwroot/OneIndex && cd /home/wwwroot/OneIndex
-	git clone https://github.com/donwa/oneindex.git && mv ./oneindex/* /home/wwwroot/OneIndex
+	git clone https://github.com/twbworld/oneindex.git && mv ./oneindex/* /home/wwwroot/OneIndex
     chmod 777 ./config && chmod 777 ./cache
     if [[ $? -eq 0 ]];then
         echo -e "OneIndex 下载成功"
@@ -51,7 +51,7 @@ function OneIndex_install(){
     fi
 }
 function aria2ng_install(){
-    mkdir -p /home/wwwroot/aria2ng && cd /home/wwwroot/aria2ng && wget https://raw.githubusercontent.com/marisn2017/Aria2_OneIndex/master/aria-ng-0.3.0.zip && unzip aria-ng-0.3.0.zip
+    mkdir -p /home/wwwroot/aria2ng && cd /home/wwwroot/aria2ng && wget https://raw.githubusercontent.com/EmptyWu/Aria2_OneIndex/master/aria-ng-0.3.0.zip && unzip aria-ng-0.3.0.zip
 	if [[ $? -eq 0 ]];then
         echo -e "AriaNg 下载成功"
         sleep 1
@@ -62,8 +62,8 @@ function aria2ng_install(){
 }
 function nginx_conf_add(){
     rm -rf /etc/nginx/conf.d/default.conf
-    wget -N -P  /etc/nginx/conf.d/ --no-check-certificate "https://raw.githubusercontent.com/marisn2017/Aria2_OneIndex/master/OneIndex.conf"
-    wget -N -P  /etc/nginx/conf.d/ --no-check-certificate "https://raw.githubusercontent.com/marisn2017/Aria2_OneIndex/master/aria2ng.conf"
+    wget -N -P  /etc/nginx/conf.d/ --no-check-certificate "https://raw.githubusercontent.com/EmptyWu/Aria2_OneIndex/master/OneIndex.conf"
+    wget -N -P  /etc/nginx/conf.d/ --no-check-certificate "https://raw.githubusercontent.com/EmptyWu/Aria2_OneIndex/master/aria2ng.conf"
 	if [[ $? -eq 0 ]];then
         echo -e "nginx 配置导入成功"
         sleep 1
@@ -88,8 +88,8 @@ function aria_install(){
 	cd /root
 	rm -rf aria2 aria2-1.34.0-linux-gnu-64bit-build1.tar.bz2
 	mkdir "/root/.aria2" && cd "/root/.aria2"
-	wget "https://raw.githubusercontent.com/chiakge/Aria2-Rclone-DirectoryLister-Aria2Ng/master/sh/dht.dat"
-	wget "https://raw.githubusercontent.com/chiakge/Aria2-Rclone-DirectoryLister-Aria2Ng/master/sh/trackers-list-aria2.sh"
+	wget "https://raw.githubusercontent.com/EmptyWu/aria2.conf/master/dht.dat"
+	wget "https://raw.githubusercontent.com/EmptyWu/aria2.conf/master/tracker.sh"
 	echo '' > /root/.aria2/aria2.session
 	chmod +x /root/.aria2/trackers-list-aria2.sh
 	chmod 777 /root/.aria2/aria2.session
@@ -154,11 +154,11 @@ function install_web(){
 }
 function init_install(){
 	echo -e "开始配置Aria2自启和自动上传"
-	wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/Aria2_OneIndex/master/aria2 -O /etc/init.d/aria2
+	wget --no-check-certificate https://raw.githubusercontent.com/EmptyWu/Aria2_OneIndex/master/aria2 -O /etc/init.d/aria2
 	chmod +x /etc/init.d/aria2
 	echo 'bash /etc/init.d/aria2 start' >> /etc/rc.local
 	cd /root/.aria2
-	wget --no-check-certificate https://raw.githubusercontent.com/marisn2017/Aria2_OneIndex/master/OneIndexupload.sh
+	wget --no-check-certificate https://raw.githubusercontent.com/EmptyWu/Aria2_OneIndex/master/OneIndexupload.sh
 	chmod +x /root/.aria2/OneIndexupload.sh
 	bash /etc/init.d/aria2 start
 }
