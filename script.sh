@@ -40,7 +40,7 @@ function OneIndex_install(){
     yum install git -y
 	yum update nss curl iptables -y
     mkdir -p /home/wwwroot/OneIndex && cd /home/wwwroot/OneIndex
-	git clone https://github.com/twbworld/oneindex.git && mv ./oneindex/* /home/wwwroot/OneIndex
+	git clone https://github.com/qupb/oneindex.git && mv ./oneindex/* /home/wwwroot/OneIndex
     chmod 777 ./config && chmod 777 ./cache
     if [[ $? -eq 0 ]];then
         echo -e "OneIndex 下载成功"
